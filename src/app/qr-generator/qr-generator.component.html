@@ -1,0 +1,65 @@
+<div class="qr-generator">
+    <h1>QR Generator</h1>
+    <div class="form-container">
+        <div class="dropdown">
+            <label for="qrType">QR Type: </label>
+            <select [(ngModel)]="selectedType" (change)="onTypeChange()" id="qrType">
+                <option *ngFor="let type of qrTypes" [value]="type.value">{{ type.label }}</option>
+            </select>
+        </div>
+        
+        <button class="generate-button" (click)="generateQRCode()">Generar QR</button>
+    </div>
+    <div class="qr-code-fields">
+        <!-- Link -->
+        <input *ngIf="selectedType === 'link'" class="input-url" [(ngModel)]="qrContent.url" placeholder="Submit URL" />
+
+        <!-- Email -->
+        <div *ngIf="selectedType === 'email'">
+            <input class="input-url" [(ngModel)]="qrContent.to" placeholder="To" />
+            <input class="input-url" [(ngModel)]="qrContent.subject" placeholder="Subject" />
+            <textarea class="input-url" [(ngModel)]="qrContent.message" placeholder="Message"></textarea>
+        </div>
+
+        <!-- Text -->
+        <input *ngIf="selectedType === 'text'" class="input-url" [(ngModel)]="qrContent.text" placeholder="Text" />
+
+        <!-- Call -->
+        <div *ngIf="selectedType === 'call'">
+            <input class="input-url" [(ngModel)]="qrContent.countryCode" placeholder="Country Code" />
+            <input class="input-url" [(ngModel)]="qrContent.phoneNumber" placeholder="Phone Number" />
+        </div>
+
+        <!-- SMS -->
+        <div *ngIf="selectedType === 'sms'">
+            <input class="input-url" [(ngModel)]="qrContent.countryCode" placeholder="Country Code" />
+            <input class="input-url" [(ngModel)]="qrContent.phoneNumber" placeholder="Phone Number" />
+            <textarea class="input-url" [(ngModel)]="qrContent.message" placeholder="Message"></textarea>
+        </div>
+
+        <!-- WhatsApp -->
+        <div *ngIf="selectedType === 'whatsapp'">
+            <input class="input-url" [(ngModel)]="qrContent.countryCode" placeholder="Country Code" />
+            <input class="input-url" [(ngModel)]="qrContent.phoneNumber" placeholder="Phone Number" />
+            <textarea class="input-url" [(ngModel)]="qrContent.message" placeholder="Message"></textarea>
+        </div>
+
+        <!-- Wi-Fi -->
+        <div *ngIf="selectedType === 'wifi'">
+            <input class="input-url" [(ngModel)]="qrContent.ssid" placeholder="SSID" />
+            <select [(ngModel)]="qrContent.type" class="input-url">
+                <option value="WEP">WEP</option>
+                <option value="WPA">WPA</option>
+                <option value="nopass">No Password</option>
+            </select>
+            <input class="input-url" [(ngModel)]="qrContent.password" placeholder="Password" />
+            <label>
+                <input type="checkbox" [(ngModel)]="qrContent.hidden" /> Hidden
+            </label>
+        </div>
+    </div>
+
+    <div class="qr-code-container" *ngIf="qrCodeImage">
+        <img [src]="qrCodeImage" alt="QR Code" />
+    </div>
+</div>
