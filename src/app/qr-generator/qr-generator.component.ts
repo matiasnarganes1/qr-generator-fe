@@ -11,52 +11,69 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class QrGeneratorComponent {
-  selectedType = 'link';
+  selectedType = 'Link';
   qrCodeImage: string | null = null;
-  qrContent: any = {}; // Este objeto almacenará los datos de cada tipo de QR
+  qrContent: any = {};
 
   qrTypes = [
-    { value: 'link', label: 'Link' },
-    { value: 'email', label: 'Email' },
-    { value: 'text', label: 'Text' },
-    { value: 'call', label: 'Call' },
-    { value: 'sms', label: 'SMS' },
-    { value: 'whatsapp', label: 'WhatsApp' },
-    { value: 'wifi', label: 'Wi-Fi' },
+    { value: 'fas fa-link', label: 'Link' },
+    { value: 'fas fa-envelope', label: 'Email' },
+    { value: 'fas fa-file-alt', label: 'Text' },
+    { value: 'fas fa-phone', label: 'Call' },
+    { value: 'fas fa-comment', label: 'Sms' },
+    { value: 'fab fa-whatsapp', label: 'WhatsApp' }
   ];
 
-  onTypeChange() {
-    this.qrContent = {}; // Restablecer el contenido cuando se cambia el tipo
+  selectOption(value: string) {
+    this.selectedType = value;
   }
 
   generateQRCode() {
-    // Genera la URL del código QR usando los datos de qrContent
     let qrData = '';
 
     switch (this.selectedType) {
-      case 'link':
+      case 'Link':
         qrData = this.qrContent.url;
         break;
-      case 'email':
+      case 'Email':
         qrData = `mailto:${this.qrContent.to}?subject=${encodeURIComponent(this.qrContent.subject)}&body=${encodeURIComponent(this.qrContent.message)}`;
         break;
-      case 'text':
+      case 'Text':
         qrData = this.qrContent.text;
         break;
-      case 'call':
+      case 'Call':
         qrData = `tel:${this.qrContent.countryCode}${this.qrContent.phoneNumber}`;
         break;
-      case 'sms':
+      case 'Sms':
         qrData = `sms:${this.qrContent.countryCode}${this.qrContent.phoneNumber}?body=${encodeURIComponent(this.qrContent.message)}`;
         break;
-      case 'whatsapp':
+      case 'WhatsApp':
         qrData = `https://wa.me/${this.qrContent.countryCode}${this.qrContent.phoneNumber}?text=${encodeURIComponent(this.qrContent.message)}`;
-        break;
-      case 'wifi':
-        qrData = `WIFI:S:${this.qrContent.ssid};T:${this.qrContent.type};P:${this.qrContent.password};H:${this.qrContent.hidden};`;
         break;
     }
 
     this.qrCodeImage = `https://localhost:7136/qr-api/QrController/generate?url=${encodeURIComponent(qrData)}&qrType=${this.selectedType}`;
   }
+
+  convertImageToBase64(url: string): Promise<string> {
+    return fetch(url)
+      .then(response => response.blob())
+      .then(blob => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      }));
+  }
+  
+  async downloadQRCode(): Promise<void> {
+    if (this.qrCodeImage) {
+      const base64Image = await this.convertImageToBase64(this.qrCodeImage);
+      const link = document.createElement('a');
+      link.href = base64Image;
+      link.download = 'qr-code.png';
+      link.click();
+    }
+  }
+  
 }
