@@ -1,0 +1,20 @@
+{
+    "SignIn": "Entrar",
+    "SignUp": "Cadastre-se gratuitamente",
+    "Footer1": "Feito por Matias Narganes | Com tecnologia de ",
+    "Footer2": "2024 Todos os direitos reservados.",
+    "Title": "Gerador de Código QR - Gere códigos QR gratuitamente",
+    "LinkLabel": "Compartilhe o URL do seu site",
+    "EmailLabel": "Crie um e-mail para as pessoas entrarem em contato com você",
+    "TextLabel": "Digite um texto",
+    "CallLabel": "Preencha os campos com seu número de telefone",
+    "SmsLabel": "Preencha os campos com seu número de telefone e uma mensagem",
+    "WhatsappLabel": "Preencha os campos com seu número de telefone e uma mensagem",
+    "EnterUrl": "Digite o URL",
+    "To": "Para",
+    "Subject": "Assunto",
+    "Message": "Mensagem",
+    "Text": "Digite o texto",
+    "CountryCode": "Código do país",
+    "PhoneNumber": "Número de telefone"
+}

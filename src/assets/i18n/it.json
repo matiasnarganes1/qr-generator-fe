@@ -1,0 +1,20 @@
+{
+    "SignIn": "Accedi",
+    "SignUp": "Iscriviti gratuitamente",
+    "Footer1": "Fatto da Matias Narganes | Alimentato da ",
+    "Footer2": "2024 Tutti i diritti riservati.",
+    "Title": "Generatore di QR Code - Genera codici QR gratuitamente",
+    "LinkLabel": "Condividi l'URL del tuo sito web",
+    "EmailLabel": "Progetta un'email per far contattare le persone",
+    "TextLabel": "Scrivi un testo",
+    "CallLabel": "Completa i campi con il tuo numero di telefono",
+    "SmsLabel": "Completa i campi con il tuo numero di telefono e un messaggio",
+    "WhatsappLabel": "Completa i campi con il tuo numero di telefono e un messaggio",
+    "EnterUrl": "Inserisci URL",
+    "To": "A",
+    "Subject": "Oggetto",
+    "Message": "Messaggio",
+    "Text": "Inserisci testo",
+    "CountryCode": "Prefisso internazionale",
+    "PhoneNumber": "Numero di telefono"
+}

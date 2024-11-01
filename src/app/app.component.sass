@@ -1,8 +1,97 @@
+@import '../styles.sass'
+
 .page-container
   display: flex
   flex-direction: column
   min-height: 100vh
   align-items: center
+
+  .nav-bar-container
+    width: 100%
+    display: flex
+    justify-content: space-between
+    border-bottom: $medium-gray solid 3px
+    padding: 10px 0
+    align-items: center
+
+    .logo
+      width: 250px
+      height: auto
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2)
+      border-radius: 4px
+      margin-left: 10px
+    
+    .nav-buttons
+      margin-right: 20px
+      gap: 20px
+      display: flex
+
+      .custom-dropdown
+        position: relative
+        display: inline-block
+        justify-content: center
+        align-items: center
+
+        .selected-language
+          display: flex
+          align-items: center
+          padding: 10px
+          border: 1px solid #ccc
+          border-radius: 5px
+          cursor: pointer
+          background-color: #f9f9f9
+
+          i
+            margin-right: 5px
+
+        .dropdown-options
+          position: absolute
+          z-index: 1000
+          background-color: #f9f9f9
+          border: 1px solid #ccc
+          border-radius: 5px
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+
+          div
+            padding: 10px
+            cursor: pointer
+
+            &:hover
+              background-color: #e0e0e0
+
+      
+      .user-buttons
+        display: flex
+        align-items: center
+
+        .sign-in-button
+          padding: 20px 40px
+          border: none
+          border-radius: 4px
+          background-color: $light-gray
+          color: $black
+          cursor: pointer
+          transition: background-color 0.3s
+          margin-left: 10px
+          font-weight: bold
+
+          &:hover
+            background-color: $medium-gray
+
+        .sign-up-button
+          padding: 20px 40px
+          border: none
+          border-radius: 4px
+          background-color: #000
+          color: #fff
+          cursor: pointer
+          margin-left: 10px
+          transition: background-color 0.3s
+          font-weight: bold
+
+          &:hover
+            background-color: $dark-gray
+
 
   .content
     flex-grow: 1
@@ -10,17 +99,6 @@
     padding: 20px
     box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2)
 
-.navbar
-  width: 100%
-  display: flex
-  align-items: center
-  border-bottom: #000 solid 2px
-  padding: 10px 0
-
-  .logo
-    width: 250px
-    height: auto
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3)
 
 .footer-legend
   margin-top: 2rem

@@ -1,4 +1,4 @@
-<h1>QR Code Generator</h1>
+<h1>{{ 'Title' | translate }}</h1>
 <div class="content-container">
     <div class="form-container">
         <div class="buttons-container">
@@ -9,51 +9,54 @@
                     <span>{{ type.label }}</span>
                 </button>
             </div>
-            <button class="generate-button" (click)="generateQRCode()">
-                Generate QR
-            </button>
         </div>
         <div class="fields-container">
-            <div *ngIf="selectedType === 'Link'">
-                <input class="input-field" [(ngModel)]="qrContent.url" placeholder="Enter URL" />
+            <div *ngIf="selectedType === 'Link' || selectedType === 'firstLink'">
+                <p>{{ 'LinkLabel' | translate }}</p>
+                <input class="input-field" [(ngModel)]="qrContent.url" [placeholder]="'EnterUrl' | translate" (input)="generateQRCode()"/>
             </div>
-
             <!-- Email -->
             <div *ngIf="selectedType === 'Email'">
-                <input class="input-field" [(ngModel)]="qrContent.to" placeholder="To" />
-                <input class="input-field" [(ngModel)]="qrContent.subject" placeholder="Subject" />
-                <textarea class="input-field" [(ngModel)]="qrContent.message" placeholder="Message"></textarea>
+                <p>{{ 'EmailLabel' | translate }}</p>
+                <input class="input-field" [(ngModel)]="qrContent.to" [placeholder]="'To' | translate" (input)="generateQRCode()"/>
+                <input class="input-field" [(ngModel)]="qrContent.subject" [placeholder]="'Subject' | translate" (input)="generateQRCode()"/>
+                <textarea class="text-area-field" [(ngModel)]="qrContent.message" [placeholder]="'Message' | translate" (input)="generateQRCode()"></textarea>
             </div>
 
             <!-- Text -->
             <div *ngIf="selectedType === 'Text'">
-                <textarea class="input-field" [(ngModel)]="qrContent.text" placeholder="Enter Text"></textarea>
+                <p>{{ 'TextLabel' | translate }}</p>
+                <textarea class="text-area-field" [(ngModel)]="qrContent.text" [placeholder]="'Text' | translate" (input)="generateQRCode()"></textarea>
             </div>
 
             <!-- Call -->
             <div *ngIf="selectedType === 'Call'">
-                <input class="input-field" [(ngModel)]="qrContent.countryCode" placeholder="Country Code" />
-                <input class="input-field" [(ngModel)]="qrContent.phoneNumber" placeholder="Phone Number" />
+                <p>{{ 'CallLabel' | translate }}</p>
+                <input class="input-field" [(ngModel)]="qrContent.countryCode" [placeholder]="'CountryCode' | translate" (input)="generateQRCode()"/>
+                <input class="input-field" [(ngModel)]="qrContent.phoneNumber" [placeholder]="'PhoneNumber' | translate" (input)="generateQRCode()"/>
             </div>
 
             <!-- SMS -->
             <div *ngIf="selectedType === 'Sms'">
-                <input class="input-field" [(ngModel)]="qrContent.countryCode" placeholder="Country Code" />
-                <input class="input-field" [(ngModel)]="qrContent.phoneNumber" placeholder="Phone Number" />
-                <textarea class="input-field" [(ngModel)]="qrContent.message" placeholder="Message"></textarea>
+                <p>{{ 'SmsLabel' | translate }}</p>
+                <input class="input-field" [(ngModel)]="qrContent.countryCode" [placeholder]="'CountryCode' | translate" (input)="generateQRCode()"/>
+                <input class="input-field" [(ngModel)]="qrContent.phoneNumber" [placeholder]="'PhoneNumber' | translate" (input)="generateQRCode()"/>
+                <textarea class="text-area-field" [(ngModel)]="qrContent.message" [placeholder]="'Message' | translate" (input)="generateQRCode()"></textarea>
             </div>
 
             <!-- WhatsApp -->
             <div *ngIf="selectedType === 'WhatsApp'">
-                <input class="input-field" [(ngModel)]="qrContent.countryCode" placeholder="Country Code" />
-                <input class="input-field" [(ngModel)]="qrContent.phoneNumber" placeholder="Phone Number" />
-                <textarea class="input-field" [(ngModel)]="qrContent.message" placeholder="Message"></textarea>
+                <p>{{ 'WhatsappLabel' | translate }}</p>
+                <input class="input-field" [(ngModel)]="qrContent.countryCode" [placeholder]="'CountryCode' | translate" (input)="generateQRCode()"/>
+                <input class="input-field" [(ngModel)]="qrContent.phoneNumber" [placeholder]="'PhoneNumber' | translate" (input)="generateQRCode()"/>
+                <textarea class="text-area-field" [(ngModel)]="qrContent.message" [placeholder]="'Message' | translate" (input)="generateQRCode()"></textarea>
             </div>
         </div>
     </div>
-    <div class="image-container" *ngIf="qrCodeImage">
-        <img [src]="qrCodeImage" alt="Generated QR Code">
-        <button class="download-button" (click)="downloadQRCode()">
+    <div class="image-container">
+        <img [src]="qrCodeImage" alt="Generated QR Code" *ngIf="qrCodeImage">
+        <img src="../../assets/images/qr-code-test.png" alt="QR Code test image" *ngIf="!qrCodeImage || qrCodeImage == '' ">
+        <button class="download-button" (click)="downloadQRCode()" *ngIf="qrCodeImage">
             <i class="fas fa-download"></i>
         </button>
     </div>      

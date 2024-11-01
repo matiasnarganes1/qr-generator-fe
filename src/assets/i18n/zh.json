@@ -1,0 +1,20 @@
+{
+    "SignIn": "登录",
+    "SignUp": "免费注册",
+    "Footer1": "由 Matias Narganes 制作 | 支持 ",
+    "Footer2": "2024 版权所有。",
+    "Title": "QR 码生成器 - 免费生成 QR 码",
+    "LinkLabel": "分享您的网站网址",
+    "EmailLabel": "设计一个电子邮件供人们联系您",
+    "TextLabel": "输入文本",
+    "CallLabel": "填写您的电话号码",
+    "SmsLabel": "填写您的电话号码和消息",
+    "WhatsappLabel": "填写您的电话号码和消息",
+    "EnterUrl": "输入网址",
+    "To": "收件人",
+    "Subject": "主题",
+    "Message": "信息",
+    "Text": "输入文字",
+    "CountryCode": "国家代码",
+    "PhoneNumber": "电话号码"
+}

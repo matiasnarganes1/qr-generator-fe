@@ -1,0 +1,20 @@
+{
+    "SignIn": "Sign In",
+    "SignUp": "Sign Up Free",
+    "Footer1": "Made by Matias Narganes | Powered by ",
+    "Footer2": "2024 All rights reserved.",
+    "Title": "QR Code Generator - Generate QR codes for free",
+    "LinkLabel": "Share your website url",
+    "EmailLabel": "Design an E-mail for the people to contact you",
+    "TextLabel": "Type a text",
+    "CallLabel": "Complete the fields with your phone number",
+    "SmsLabel": "Complete the fields with your phone number and a message",
+    "WhatsappLabel": "Complete the fields with your phone number and a message",
+    "EnterUrl": "Enter Url",
+    "To": "To",
+    "Subject": "Subject",
+    "Message": "Message",
+    "Text": "Enter Text",
+    "CountryCode": "Country Code",
+    "PhoneNumber": "Phone Number"
+}
