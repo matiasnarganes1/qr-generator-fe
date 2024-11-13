@@ -10,6 +10,7 @@ import { SmsFields } from '../shared/models/sms-fields';
 import { TextFields } from '../shared/models/text-fields';
 import { WhatsappFields } from '../shared/models/whatsapp-fields';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { QrCodeGeneratorService } from '../shared/services/qr-code-generator.service';
 
 @Component({
   standalone: true,
@@ -20,22 +21,22 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 
 export class QrGeneratorComponent implements OnInit {
-  constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('en');
-  }
-
-  changeLanguage(lang: string) {
-    this.translate.use(lang);
-  }
-  
-  qrCodeImage: string | null = null;
+  qrCodeImage: string = '';
   selectedType: string = '';
   qrContent: any = {}
   qrTypes: any = [];
 
+  constructor(private translate: TranslateService, private qrCodeGeneratorService: QrCodeGeneratorService) {
+    this.translate.setDefaultLang('en');
+  }
+
   ngOnInit(): void {
     this.selectedType = 'firstLink';
     this.qrTypes = Qr_Types;
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
   }
 
   async selectOption(type: string) {
@@ -74,7 +75,18 @@ export class QrGeneratorComponent implements OnInit {
         qrData = `https://wa.me/${this.qrContent.countryCode}${this.qrContent.phoneNumber}?text=${encodeURIComponent(this.qrContent.message)}`;
         break;
     }
-    this.qrCodeImage = `https://localhost:7136/qr-api/QrController/generate?url=${encodeURIComponent(qrData)}&qrType=${this.selectedType}`;
+
+    if (qrData != '') {
+      this.qrCodeGeneratorService.getQrCode(qrData, this.selectedType).subscribe(
+        (qrCodeImage: string) => {
+          this.qrCodeImage = qrCodeImage;
+        },
+        (error) => {
+          console.error("Error al obtener el código QR", error);
+        }
+      );      
+      //this.qrCodeImage = `https://localhost:7136/qr-api/QrController/generate?url=${encodeURIComponent(qrData)}&qrType=${this.selectedType}`;
+    }
   }
 
   clearFields() {
@@ -169,4 +181,40 @@ export class QrGeneratorComponent implements OnInit {
     });
     return result;
   }
+
+  copyToClipBoard() {
+    const qrCodeImage = this.qrCodeImage;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = qrCodeImage;
+  
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+  
+      if (ctx) {
+        ctx.drawImage(img, 0, 0);
+        
+        canvas.toBlob(blob => {
+          if (blob) {
+            const item = new ClipboardItem({ 'image/png': blob });
+            navigator.clipboard.write([item]).then(() => {
+              console.log('Image copied to clipboard');
+              Swal.fire({
+                title: 'Copied!',
+                text: 'QR Code image has been copied to your clipboard.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
+            }).catch(err => {
+              console.error('Failed to copy image: ', err);
+            });
+          }
+        });
+      }
+    };
+  }
+  
 }

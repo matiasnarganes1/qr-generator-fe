@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 
 export class AppComponent {
   title = 'qr-generator';
-  selectedLanguage = 'en';
+  selectedLanguage = 'EN';
   isDropdownOpen = false;
 
   appLanguages = [
